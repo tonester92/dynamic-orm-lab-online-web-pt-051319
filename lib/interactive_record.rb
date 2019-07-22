@@ -27,10 +27,6 @@ class InteractiveRecord
     end
   end
 
-  # ORM Methods
-
-  # SAVE - INSERT INTO students(name, grade) VALUES (x, y)
-
   def save
     sql = <<-SQL
       INSERT INTO #{table_name_for_insert}(#{col_names_for_insert})
@@ -61,7 +57,8 @@ class InteractiveRecord
 
   def self.find_by_name(name)
     sql = <<-SQL
-      SELECT * FROM #{table_name}
+      SELECT * 
+      FROM #{table_name}
       WHERE name = ?
       SQL
 
@@ -73,11 +70,11 @@ class InteractiveRecord
     value_name = attribute.values[0]
 
     sql = <<-SQL
-      SELECT * FROM #{table_name}
+      SELECT * 
+      FROM #{table_name}
       WHERE #{column_name} = ?
       SQL
 
     DB[:conn].execute(sql, value_name);
   end
-
 end
